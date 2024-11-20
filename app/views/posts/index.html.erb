@@ -1,0 +1,31 @@
+<!-- app/views/posts/index.html.erb -->
+
+<h1>All Posts</h1>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Expires on</th>
+    <th>Board</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th></th>
+  </tr>
+
+  <% @list_of_posts.each do |a_post| %>
+    <tr>
+      <td><%= a_post.id %></td>
+      <td><%= a_post.title %></td>
+      <td><%= a_post.body %></td>
+      <td><%= a_post.expires_on %></td>
+      <td><%= a_post.board.name %></td>
+      <td><%= time_ago_in_words(a_post.created_at) %> ago</td>
+      <td><%= time_ago_in_words(a_post.updated_at) %> ago</td>
+      <td>
+        <a href="/posts/<%= a_post.id %>">Show details</a>
+      </td>
+    </tr>
+  <% end %>
+</table>

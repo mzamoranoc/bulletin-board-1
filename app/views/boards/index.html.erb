@@ -1,0 +1,26 @@
+<!-- app/views/boards/index.html.erb -->
+
+<h1>All Boards</h1>
+
+<ul>
+  <% @list_of_boards.each do |board| %>
+    <li>
+      <%= link_to board.name, "/boards/#{board.id}" %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<h2>Create a New Board</h2>
+
+<%= form_with(url: "/insert_board", method: "post") do %>
+  <div>
+    <label for="name_box">Name</label>
+    <%= text_field_tag :query_name, nil, id: "name_box" %>
+  </div>
+  <div>
+    <%= submit_tag "Add board" %>
+  </div>
+<% end %>
+

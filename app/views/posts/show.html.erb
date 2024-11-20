@@ -1,0 +1,38 @@
+<!-- app/views/posts/show.html.erb -->
+
+<h1>Post Details</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @the_post.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @the_post.body %>
+</p>
+
+<p>
+  <strong>Expires on:</strong>
+  <%= @the_post.expires_on %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= link_to @the_post.board.name, "/boards/#{@the_post.board.id}" %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= time_ago_in_words(@the_post.created_at) %> ago
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= time_ago_in_words(@the_post.updated_at) %> ago
+</p>
+
+<p>
+  <%= link_to "Back to Posts", "/posts" %> |
+  <%= link_to "Delete Post", "/delete_post/#{@the_post.id}", method: :get, data: { confirm: "Are you sure?" } %>
+</p>

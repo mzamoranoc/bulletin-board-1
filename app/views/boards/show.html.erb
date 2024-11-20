@@ -1,0 +1,63 @@
+<!-- app/views/boards/show.html.erb -->
+
+<h1><%= @the_board.name %></h1>
+
+<%= link_to "Back to Boards", "/boards" %> |
+<%= link_to "Delete Board", "/delete_board/#{@the_board.id}", method: :get, data: { confirm: "Are you sure?" } %>
+
+<hr>
+
+<h2>Active Posts</h2>
+<% if @active_posts.any? %>
+  <ul>
+    <% @active_posts.each do |post| %>
+      <li>
+        <h3><%= post.title %></h3>
+        <p><%= post.body %></p>
+        <p>Expires on: <%= post.expires_on.strftime("%B %d, %Y") %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No active posts.</p>
+<% end %>
+
+<hr>
+
+<h2>Expired Posts</h2>
+<% if @expired_posts.any? %>
+  <ul>
+    <% @expired_posts.each do |post| %>
+      <li>
+        <h3><%= post.title %></h3>
+        <p><%= post.body %></p>
+        <p>Expired on: <%= post.expires_on.strftime("%B %d, %Y") %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No expired posts.</p>
+<% end %>
+
+<hr>
+
+<h2>Create a New Post</h2>
+
+<%= form_with(url: "/insert_post", method: "post") do %>
+  <%= hidden_field_tag :query_board_id, @the_board.id %>
+  <div>
+    <label for="title_box">Title</label>
+    <%= text_field_tag :query_title, nil, id: "title_box" %>
+  </div>
+  <div>
+    <label for="body_box">Body</label>
+    <%= text_area_tag :query_body, nil, id: "body_box" %>
+  </div>
+  <div>
+    <label for="expires_on_box">Expires on</label>
+    <%= date_field_tag :query_expires_on, nil, id: "expires_on_box" %>
+  </div>
+  <div>
+    <%= submit_tag "Add post" %>
+  </div>
+<% end %>
